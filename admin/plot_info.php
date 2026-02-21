@@ -1,23 +1,18 @@
 <?php
-// plot_info.php - Shows all 5 floors, lists ALL people on each floor (supports multiple per floor)
+// plot_info.php - Shows all 5 floors + custom delete modal
 
 require_once 'db_connect.php';
 
 $plot = trim($_GET['plot'] ?? '');
 
-// Validate plot ID (accepts A-01, B-03, etc.)
 if (!$plot || !preg_match('/^[A-C]-\d{2}$/', $plot)) {
     die("Invalid plot ID");
 }
 
-// Fetch ALL people for this plot, grouped by floor
 $sql = "
-    SELECT 
-        floor_number,
-        TRIM(CONCAT(first_name, ' ', COALESCE(middle_name,' '), last_name)) AS full_name,
-        age_at_death,
-        birth_date,
-        death_date
+    SELECT id, floor_number,
+           TRIM(CONCAT(first_name, ' ', COALESCE(middle_name,' '), last_name)) AS full_name,
+           age_at_death, birth_date, death_date
     FROM graves 
     WHERE group_code = ?
     ORDER BY floor_number, id
@@ -28,7 +23,6 @@ $stmt->bind_param("s", $plot);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Prepare array: floor 1–5, each is an array of people
 $floors = array_fill(1, 5, []);
 
 while ($row = $result->fetch_assoc()) {
@@ -38,7 +32,6 @@ while ($row = $result->fetch_assoc()) {
 $stmt->close();
 $conn->close();
 
-// Count total people across all floors
 $total_people = 0;
 foreach ($floors as $floor_people) {
     $total_people += count($floor_people);
@@ -50,7 +43,7 @@ foreach ($floors as $floor_people) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Plot <?= htmlspecialchars($plot) ?> – All 5 Floors</title>
+    <title>Plot <?= htmlspecialchars($plot) ?> – All Floors</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
@@ -96,7 +89,7 @@ foreach ($floors as $floor_people) {
         }
         .person {
             background: #e5e7eb;
-            padding: 10px 14px;
+            padding: 12px 16px;
             margin: 8px 0;
             border-radius: 6px;
         }
@@ -105,7 +98,31 @@ foreach ($floors as $floor_people) {
             font-style: italic;
             padding: 10px 0;
         }
-        .add-btn {
+        .actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .btn-edit {
+            background: #3b82f6;
+            color: white;
+        }
+        .btn-edit:hover { background: #2563eb; }
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-delete:hover { background: #dc2626; }
+        .add-btn-main {
             display: block;
             width: 100%;
             padding: 14px;
@@ -118,9 +135,7 @@ foreach ($floors as $floor_people) {
             font-size: 1.1em;
             margin: 30px 0;
         }
-        .add-btn:hover {
-            background: #219653;
-        }
+        .add-btn-main:hover { background: #219653; }
         .back {
             display: block;
             text-align: center;
@@ -128,9 +143,7 @@ foreach ($floors as $floor_people) {
             text-decoration: none;
             font-weight: bold;
         }
-        .back:hover {
-            text-decoration: underline;
-        }
+        .back:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -153,6 +166,12 @@ foreach ($floors as $floor_people) {
                         <strong><?= htmlspecialchars($person['full_name']) ?></strong><br>
                         Age: <?= $person['age_at_death'] ?><br>
                         Born: <?= $person['birth_date'] ?> • Died: <?= $person['death_date'] ?>
+
+                        <div class="actions">
+                            <a href="edit.php?id=<?= $person['id'] ?>&plot=<?= urlencode($plot) ?>" class="btn btn-edit">Edit</a>
+                            <button class="btn btn-delete" 
+                                    onclick="showDeleteModal(<?= $person['id'] ?>, <?= $i ?>)">Delete</button>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -161,9 +180,12 @@ foreach ($floors as $floor_people) {
         </div>
     <?php endfor; ?>
 
-    <a href="add_form.php?group=<?= urlencode($plot) ?>" class="add-btn">+ Add Person to this Plot</a>
+    <a href="add_form.php?group=<?= urlencode($plot) ?>" class="add-btn-main">+ Add Person to this Plot</a>
     <a href="circle.php" class="back">← Back to Cemetery Map</a>
 </div>
+
+<!-- Include the custom delete modal from separate file -->
+<?php include 'delete_modal.php'; ?>
 
 </body>
 </html>

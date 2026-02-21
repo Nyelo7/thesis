@@ -7,6 +7,6 @@ if ($id > 0) {
     $conn->query("DELETE FROM graves WHERE id = $id");
 }
 
-header("Location: circle.php");
+
 exit;
 ?>
