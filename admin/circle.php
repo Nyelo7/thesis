@@ -34,66 +34,58 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cemetery Circles</title>
-  <style>
+<style>
     body {
-      margin: 0;
-      padding: 20px;
-      background: #f8f9fa;
-      font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f8f9fa;
+        font-family: Arial, Helvetica, sans-serif;
     }
-    h1 { 
-      text-align: center; 
-      color: #2c3e50; 
-      margin-bottom: 10px; 
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 10px;
     }
-    .subtitle { 
-      text-align: center; 
-      color: #555; 
-      margin-bottom: 30px; 
+    .subtitle {
+        text-align: center;
+        color: #555;
+        margin-bottom: 30px;
     }
     .container {
-      position: relative;
-      width: 1100px;
-      height: 750px;
-      margin: 0 auto 40px;
-      background: linear-gradient(to bottom, #e8f4e9, #d0e8d5);
-      border: 3px solid #5a8c4f;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        position: relative;
+        width: 600px;
+        height: 1000px;                 /* Your new height */
+        margin: 0 auto 40px;
+        background-image: url('pic.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 3px solid #5a8c4f;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.12);
     }
     .circle {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #444;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.05rem;
-      font-weight: bold;
-      color: #222;
-      cursor: pointer;
-      transition: all 0.22s ease;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid #555;
+        cursor: pointer;
+        transition: all 0.22s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
     .circle:hover {
-      transform: scale(1.15);
-      z-index: 10;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        transform: scale(1.5);
+        z-index: 10;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.4);
     }
-    .circle .id   { font-size: 1.15rem; }
-    .circle .cnt  { font-size: 0.9rem; color: #555; }
 
-    .fill-0 { background: #ffffff; }
-    .fill-1 { background: #e3f2fd; }
-    .fill-2 { background: #d4edda; }
-    .fill-3 { background: #fff3cd; }
-    .fill-4 { background: #f8d7da; }
-    .fill-5 { background: #f5c6cb; color: #721c24; }
-  </style>
+    /* New color scheme */
+    .fill-0 { background: #22c55e; }           /* Green - 0 people (no data) */
+    .fill-2-4 { background: #eab308; }         /* Dark yellow - 2 to 4 people */
+    .fill-5plus { background: #ef4444; }       /* Red - 5 or more */
+</style>
 </head>
 <body>
 
@@ -103,25 +95,31 @@ $conn->close();
 <div class="container" id="map"></div>
 
 <script>
-// Static circles – add more if needed
 const circles = [
-  { id: "A-01", x: 140, y: 100 },
-  { id: "A-02", x: 300, y: 100 },
-  { id: "A-03", x: 460, y: 100 },
-  { id: "A-04", x: 620, y: 100 },
-  { id: "A-05", x: 780, y: 100 },
+  { id: "A-01", x: 60,  y: 100 },
+  { id: "A-02", x: 140, y: 100 },
+  { id: "A-03", x: 220, y: 100 },
+  { id: "A-04", x: 300, y: 100 },
+  { id: "A-05", x: 380, y: 100 },
+  { id: "A-06", x: 460, y: 100 },
 
-  { id: "B-01", x: 200, y: 240 },
-  { id: "B-02", x: 360, y: 240 },
-  { id: "B-03", x: 520, y: 240 },
-  { id: "B-04", x: 680, y: 240 },
-  { id: "B-05", x: 840, y: 240 },
+  { id: "B-01", x: 100, y: 220 },
+  { id: "B-02", x: 180, y: 220 },
+  { id: "B-03", x: 260, y: 220 },
+  { id: "B-04", x: 340, y: 220 },
+  { id: "B-05", x: 420, y: 220 },
 
-  { id: "C-01", x: 120, y: 380 },
-  { id: "C-02", x: 280, y: 380 },
-  { id: "C-03", x: 440, y: 380 },
-  { id: "C-04", x: 600, y: 380 },
-  { id: "C-05", x: 760, y: 380 },
+  { id: "C-01", x: 40,  y: 360 },
+  { id: "C-02", x: 120, y: 360 },
+  { id: "C-03", x: 200, y: 360 },
+  { id: "C-04", x: 280, y: 360 },
+  { id: "C-05", x: 360, y: 360 },
+
+  { id: "D-01", x: 40,  y: 460 },
+  { id: "D-02", x: 120, y: 460 },
+  { id: "D-03", x: 200, y: 460 },
+  { id: "D-04", x: 280, y: 460 },
+  { id: "D-05", x: 360, y: 460 },
 ];
 
 const dbData = <?= json_encode($group_data) ?>;
@@ -129,21 +127,27 @@ const dbData = <?= json_encode($group_data) ?>;
 const map = document.getElementById('map');
 
 circles.forEach(c => {
-  const info = dbData[c.id] || { count: 0, names: [] };
+  const info = dbData[c.id] || { count: 0 };
 
   const div = document.createElement('div');
-  div.className = `circle fill-${Math.min(info.count, 5)}`;
+  div.className = 'circle';
+
+  // Correct color classes based on your request
+  if (info.count === 0) {
+    div.classList.add('fill-0');       // Green - no data
+  } else if (info.count >= 1 && info.count <= 4) {
+    div.classList.add('fill-2-4');     // Dark yellow - 2 to 4
+  } else if (info.count >= 5) {
+    div.classList.add('fill-5plus');   // Red - 5 or more
+  } else {
+    div.classList.add('fill-1');       // Add this for count = 1 (make it green too)
+  }
+
   div.style.left = c.x + 'px';
   div.style.top  = c.y + 'px';
 
-  div.innerHTML = `
-    <div class="id">${c.id}</div>
-    <div class="cnt">${info.count} / 5</div>
-  `;
-
-  // Open in the SAME tab (changed from _blank to _self)
   div.onclick = () => {
-    window.location.href = 'plot_info.php?plot=' + encodeURIComponent(c.id);
+  window.location.href = 'add_form.php?plot=' + encodeURIComponent(c.id);
   };
 
   map.appendChild(div);

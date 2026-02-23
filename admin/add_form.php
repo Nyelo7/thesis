@@ -1,6 +1,15 @@
 <?php
 // add_form.php
+
+// Get pre-selected plot from URL (passed from circle.php)
+$pre_selected_plot = trim($_GET['plot'] ?? '');
+
+// If no plot was passed, show error or fallback (optional)
+if (empty($pre_selected_plot)) {
+    $pre_selected_plot = 'No plot selected'; // or die("Error: No plot selected");
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +60,15 @@
       box-sizing: border-box;
       font-size: 1em;
     }
+    .readonly-text {
+      background: #f0f0f0;
+      color: #333;
+      cursor: default;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-weight: bold;
+    }
     button {
       background: #27ae60;
       color: white;
@@ -100,23 +118,10 @@
       <tr>
         <td>Plot / Circle *</td>
         <td>
-          <select name="group_code" required>
-            <option value="A-01">A-01</option>
-            <option value="A-02">A-02</option>
-            <option value="A-03">A-03</option>
-            <option value="A-04">A-04</option>
-            <option value="A-05">A-05</option>
-            <option value="B-01">B-01</option>
-            <option value="B-02">B-02</option>
-            <option value="B-03">B-03</option>
-            <option value="B-04">B-04</option>
-            <option value="B-05">B-05</option>
-            <option value="C-01">C-01</option>
-            <option value="C-02">C-02</option>
-            <option value="C-03">C-03</option>
-            <option value="C-04">C-04</option>
-            <option value="C-05">C-05</option>
-          </select>
+          <!-- Show selected plot as read-only text -->
+          <div class="readonly-text"><?= htmlspecialchars($pre_selected_plot) ?></div>
+          <!-- Hidden input to send the value to add.php -->
+          <input type="hidden" name="group_code" value="<?= htmlspecialchars($pre_selected_plot) ?>">
         </td>
       </tr>
       <tr>
