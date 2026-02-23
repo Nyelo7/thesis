@@ -180,7 +180,8 @@ foreach ($floors as $floor_people) {
         </div>
     <?php endfor; ?>
 
-    <a href="add_form.php?group=<?= urlencode($plot) ?>" class="add-btn-main">+ Add Person to this Plot</a>
+    <!-- Replace your current add button with this -->
+    <a href="add_form.php?plot=<?= urlencode($plot) ?>" class="add-btn-main">+ Add Person to this Plot</a>
     <a href="circle.php" class="back">← Back to Cemetery Map</a>
 </div>
 

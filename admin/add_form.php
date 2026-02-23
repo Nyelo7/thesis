@@ -1,12 +1,12 @@
 <?php
 // add_form.php
 
-// Get pre-selected plot from URL (passed from circle.php)
+// Get the plot from URL (passed from plot_info.php)
 $pre_selected_plot = trim($_GET['plot'] ?? '');
 
-// If no plot was passed, show error or fallback (optional)
+// Optional: Show error if no plot was passed
 if (empty($pre_selected_plot)) {
-    $pre_selected_plot = 'No plot selected'; // or die("Error: No plot selected");
+    $pre_selected_plot = 'No plot selected (please go back)';
 }
 ?>
 
@@ -63,7 +63,6 @@ if (empty($pre_selected_plot)) {
     .readonly-text {
       background: #f0f0f0;
       color: #333;
-      cursor: default;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -118,9 +117,9 @@ if (empty($pre_selected_plot)) {
       <tr>
         <td>Plot / Circle *</td>
         <td>
-          <!-- Show selected plot as read-only text -->
+          <!-- Show the selected plot as read-only text -->
           <div class="readonly-text"><?= htmlspecialchars($pre_selected_plot) ?></div>
-          <!-- Hidden input to send the value to add.php -->
+          <!-- Hidden field to send the plot value to add.php -->
           <input type="hidden" name="group_code" value="<?= htmlspecialchars($pre_selected_plot) ?>">
         </td>
       </tr>
