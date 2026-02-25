@@ -1,6 +1,22 @@
 <?php
 require_once 'db_connect.php';
 
+session_start();
+
+// If not logged in → redirect to login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../login/login.php");
+    exit;
+}
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: ../login/login.php");
+    exit;
+}
+
 // Fetch circle data with names for search
 $sql = "
   SELECT 
@@ -39,22 +55,42 @@ $conn->close();
       background: #f8f9fa;
       font-family: Arial, Helvetica, sans-serif;
     }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
     h1 { 
-      text-align: center; 
+      margin: 0;
       color: #2c3e50; 
-      margin-bottom: 10px; 
+    }
+    .logout-btn {
+      padding: 10px 20px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .logout-btn:hover {
+      background: #c0392b;
     }
     .subtitle { 
       text-align: center; 
       color: #555; 
-      margin-bottom: 20px; 
+      margin: 10px 0 25px;
     }
     .container {
       position: relative;
       width: 600px;
       height: 1000px;
       margin: 0 auto 40px;
-      background-image: url('pic.png');
+      background-image: url('../images/pic.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -105,7 +141,11 @@ $conn->close();
 </head>
 <body>
 
-<h1>Cemetery Circles</h1>
+<div class="header">
+  <h1>Cemetery Circles</h1>
+  <a href="?logout=1" class="logout-btn">Logout</a>
+</div>
+
 <p class="subtitle">Click a circle to view details</p>
 
 <?php include 'search_bar.php'; ?>

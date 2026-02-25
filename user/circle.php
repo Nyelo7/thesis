@@ -54,7 +54,7 @@ $conn->close();
       width: 600px;
       height: 1000px;
       margin: 0 auto 40px;
-      background-image: url('pic.png');
+      background-image: url('../images/pic.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
