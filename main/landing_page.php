@@ -193,8 +193,8 @@ $is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true
     <?php if ($is_logged_in): ?>
       <a href="../admin/circle.php" class="btn btn-primary">Go to Dashboard</a>
     <?php else: ?>
-      <a href="../login/login.php" class="btn btn-primary">Staff Login</a>
-      <a href="#" class="btn btn-outline">Learn More</a>
+      <a href="" class="btn btn-primary">Learn More</a>
+     
     <?php endif; ?>
   </div>
 </section>
@@ -222,7 +222,7 @@ $is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true
 </section>
 
 <footer>
-  <p>© <?= date('Y') ?> Cemetery Management System • Quezon City</p>
+  <p>© <?= date('Y') ?> Grave Finder • San Carlos City Pangasinan</p>
 </footer>
 
 </body>
