@@ -56,8 +56,8 @@
     }
     .circle {
       position: absolute;
-      width: 40px;
-      height: 40px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       border: 1px solid #555;
       cursor: pointer;

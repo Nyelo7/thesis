@@ -5,7 +5,7 @@ require_once 'db_connect.php';
 
 $plot = trim($_GET['plot'] ?? '');
 
-if (!$plot || !preg_match('/^[A-C]-\d{2}$/', $plot)) {
+if (!$plot || !preg_match('/^[A-F]-\d{2}$/', $plot)) {
     die("Invalid plot ID");
 }
 

@@ -1,10 +1,10 @@
-<!-- search_bar.php – Search by any part of name (first, middle, or last) -->
+<!-- search_bar.php – Full name part search + exact date + blue highlight -->
 <div style="text-align: center; margin: 30px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
   <div style="background: #ffffff; padding: 28px; border-radius: 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.08);">
     <input 
       type="text" 
       id="searchInput" 
-      placeholder="Search any part of name (Joshua, forbil, forbileforbile) or circle ID" 
+      placeholder="Search any part of name (joshua, forbil, bile) or circle ID" 
       style="
         width: 100%; max-width: 520px;
         padding: 14px 20px;
@@ -74,10 +74,10 @@
 </div>
 
 <script>
-// Search logic – match any part of first/middle/last name
+// Search: any part of name + exact date
 function searchNow() {
   const name = document.getElementById('searchInput').value.trim();
-  const birthDate = document.getElementById('birthDate').value; // "YYYY-MM-DD"
+  const birthDate = document.getElementById('birthDate').value;
   const deathDate = document.getElementById('deathDate').value;
 
   if (!name) {
@@ -90,6 +90,7 @@ function searchNow() {
 
   // Reset highlights
   document.querySelectorAll('.circle').forEach(el => {
+    el.style.backgroundColor = ''; // reset to original
     el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
     el.style.zIndex = '1';
   });
@@ -100,39 +101,36 @@ function searchNow() {
     let birthMatch = true;
     let deathMatch = true;
 
-    // Name match: any part of first/middle/last name
+    // Name match: any part of the full name
     if (id.toLowerCase().includes(term)) {
       nameMatch = true;
     } else if (data.persons && data.persons.length > 0) {
       nameMatch = data.persons.some(p => {
-        const parts = p.split('||');
-        const fullName = parts[0] || ''; // name part
-        const cleaned = fullName.trim().toLowerCase();
+        const namePart = p.split('||')[0] || '';
+        const cleaned = namePart.trim().toLowerCase();
         return cleaned.includes(term);
       });
     }
 
     if (!nameMatch) return;
 
-    // Birth date filter – exact match
+    // Birth date filter – exact
     if (birthDate) {
       birthMatch = false;
       if (data.persons && data.persons.length > 0) {
         birthMatch = data.persons.some(p => {
-          const parts = p.split('||');
-          const birth = parts[1] ? parts[1].trim().split(' ')[0] : '';
+          const birth = (p.split('||')[1] || '').trim().split(' ')[0];
           return birth === birthDate;
         });
       }
     }
 
-    // Death date filter – exact match
+    // Death date filter – exact
     if (deathDate) {
       deathMatch = false;
       if (data.persons && data.persons.length > 0) {
         deathMatch = data.persons.some(p => {
-          const parts = p.split('||');
-          const death = parts[2] ? parts[2].trim().split(' ')[0] : '';
+          const death = (p.split('||')[2] || '').trim().split(' ')[0];
           return death === deathDate;
         });
       }
@@ -149,17 +147,25 @@ function searchNow() {
   }
 }
 
-// Highlight function
+// Highlight: change circle to BLUE + glow
 function highlight(id) {
   const el = document.querySelector(`.circle[data-id="${id}"]`);
   if (!el) return;
 
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  el.style.boxShadow = '0 0 40px 20px #27ae60';
-  el.style.zIndex = '100';
+  // Save original background
+  const originalBg = el.style.backgroundColor || getComputedStyle(el).backgroundColor;
 
+  // Apply blue + glow
+  el.style.backgroundColor = '#3b82f6';      // bright blue
+  el.style.boxShadow = '0 0 40px 20px #791515'; // blue glow
+  el.style.zIndex = '100';
+  el.style.transition = 'background-color 0.4s, box-shadow 0.4s';
+
+  // Fade back after 5 seconds
   setTimeout(() => {
+    el.style.backgroundColor = originalBg;
     el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
     el.style.zIndex = '1';
   }, 5000);
@@ -172,6 +178,7 @@ function clearSearch() {
   document.getElementById('deathDate').value = '';
 
   document.querySelectorAll('.circle').forEach(el => {
+    el.style.backgroundColor = '';
     el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
     el.style.zIndex = '1';
   });
