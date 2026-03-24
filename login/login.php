@@ -1,6 +1,5 @@
 <?php
 // login/login.php
-// Redirects to ../admin/circle.php (sibling folder)
 
 session_start();
 
@@ -17,7 +16,6 @@ try {
     die("Connection failed: " . htmlspecialchars($e->getMessage()));
 }
 
-// Already logged in → redirect to admin/circle.php
 if (isset($_SESSION['username'])) {
     header("Location: ../admin/circle.php");
     exit;
@@ -41,8 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username']  = $user['username'];
             $_SESSION['user_id']   = $user['id'];
             $_SESSION['logged_in'] = true;
-
-            // Go up one level (..) then into admin/
             header("Location: ../admin/circle.php");
             exit;
         } else {
@@ -56,84 +52,226 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Cemetery System</title>
+  <title>Login – Cemetery Management</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
+    * {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .login-box {
-      background: white;
-      padding: 2.5rem 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      width: 100%;
-      max-width: 380px;
-    }
-    h2 { text-align: center; margin-bottom: 1.8rem; color: #333; }
-    .error { color: #c0392b; text-align: center; margin-bottom: 1.2rem; font-weight: bold; }
-    label { display: block; margin: 0.8rem 0 0.4rem; font-weight: bold; }
-    input[type="text"], input[type="password"] {
-      width: 100%;
-      padding: 0.9rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      padding: 0;
       box-sizing: border-box;
-      font-size: 1rem;
     }
-    .show-pw { margin: 0.6rem 0; display: flex; align-items: center; gap: 0.5rem; }
-    button {
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      color: #2d3748;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-bar {
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+      background: #2b6cb0;           /* Main dashboard blue */
+      color: white;
+      border-bottom: 1px solid #2c5282;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn-home {
+      padding: 0.6rem 1.4rem;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-home:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-1px);
+    }
+
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .login-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       width: 100%;
-      padding: 0.95rem;
-      background: #27ae60;
+      max-width: 420px;
+      padding: 2.5rem 2rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 600;
+      color: #2b6cb0;
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .subtitle {
+      color: #4a5568;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 0.98rem;
+    }
+
+    .error {
+      background: #fff5f5;
+      color: #c53030;
+      padding: 0.9rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+      border: 1px solid #feb2b2;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.55rem;
+      font-weight: 500;
+      color: #2b6cb0;
+      font-size: 0.98rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.95rem 1.1rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f7fafc;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3182ce;
+      box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+      background: white;
+    }
+
+    .show-password {
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.94rem;
+      color: #4a5568;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 1.05rem;
+      background: #3182ce;            /* Vibrant blue for button */
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 1.05rem;
-      font-weight: bold;
+      font-weight: 600;
       cursor: pointer;
+      transition: all 0.25s;
       margin-top: 1.2rem;
     }
-    button:hover { background: #219653; }
+
+    .btn-login:hover {
+      background: #2b6cb0;
+      transform: translateY(-1px);
+    }
+
+    .btn-login:active {
+      transform: translateY(1px);
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 2rem 1.6rem;
+        border-radius: 10px;
+      }
+      h1 {
+        font-size: 1.85rem;
+      }
+      .top-bar {
+        padding: 0.9rem 1rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="login-box">
-  <h2>Login</h2>
+  <div class="top-bar">
+    <a href="../main/landing_page.php" class="btn-home">Back to Home</a>
+  </div>
 
-  <?php if ($error): ?>
-    <div class="error"><?= htmlspecialchars($error) ?></div>
-  <?php endif; ?>
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Login</h1>
+     
 
-  <form method="post">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" 
-           value="<?= htmlspecialchars($input_username) ?>" required autofocus>
+      <?php if ($error): ?>
+        <div class="error"><?= htmlspecialchars($error) ?></div>
+      <?php endif; ?>
 
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
+      <form method="post">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username" 
+            value="<?= htmlspecialchars($input_username) ?>" 
+            required 
+            autofocus
+            autocomplete="username"
+          >
+        </div>
 
-    <div class="show-pw">
-      <input type="checkbox" id="showpw">
-      <label for="showpw">Show password</label>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            required 
+            autocomplete="current-password"
+          >
+        </div>
+
+        <div class="show-password">
+          <input type="checkbox" id="showpw">
+          <label for="showpw">Show password</label>
+        </div>
+
+        <button type="submit" class="btn-login">Sign In</button>
+      </form>
     </div>
+  </div>
 
-    <button type="submit">Login</button>
-  </form>
-</div>
-
-<script>
-  document.getElementById('showpw').addEventListener('change', function() {
-    const pw = document.getElementById('password');
-    pw.type = this.checked ? 'text' : 'password';
-  });
-</script>
+  <script>
+    document.getElementById('showpw').addEventListener('change', function() {
+      const pw = document.getElementById('password');
+      pw.type = this.checked ? 'text' : 'password';
+    });
+  </script>
 
 </body>
 </html>

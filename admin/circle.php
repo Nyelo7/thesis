@@ -54,7 +54,7 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cemetery Circles</title>
-  <link rel="stylesheet" href="circle-styles.css">
+  <link rel="stylesheet" href="cstyles.css">
 </head>
 <body>
 
@@ -74,7 +74,7 @@ $conn->close();
 <?= json_encode($group_data) ?>
 </script>
 
-<script src="circles.js"></script>
+<script src="acircles.js"></script>
 
 </body>
 </html>

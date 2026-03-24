@@ -5,13 +5,13 @@ require_once 'db_connect.php';
 
 $plot = trim($_GET['plot'] ?? '');
 
-if (!$plot || !preg_match('/^[A-C]-\d{2}$/', $plot)) {
+if (!$plot || !preg_match('/^[A-F]-\d{2}$/', $plot)) {
     die("Invalid plot ID");
 }
 
 $sql = "
     SELECT id, floor_number,
-           TRIM(CONCAT(first_name, ' ', COALESCE(middle_name,' '), last_name)) AS full_name,
+           TRIM(CONCAT(first_name, ' ', COALESCE(middle_name, ' '), last_name)) AS full_name,
            age_at_death, birth_date, death_date
     FROM graves 
     WHERE group_code = ?
@@ -166,8 +166,6 @@ foreach ($floors as $floor_people) {
                         <strong><?= htmlspecialchars($person['full_name']) ?></strong><br>
                         Age: <?= $person['age_at_death'] ?><br>
                         Born: <?= $person['birth_date'] ?> • Died: <?= $person['death_date'] ?>
-
-
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -177,11 +175,8 @@ foreach ($floors as $floor_people) {
     <?php endfor; ?>
 
     <!-- Replace your current add button with this -->
-    
     <a href="circle.php" class="back">← Back to Cemetery Map</a>
 </div>
-
-
 
 </body>
 </html>

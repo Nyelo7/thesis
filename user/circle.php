@@ -1,22 +1,5 @@
 <?php
 require_once 'db_connect.php';
-
-session_start();
-
-// If not logged in → redirect to login
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: ../login/login.php");
-    exit;
-}
-
-// Handle logout
-if (isset($_GET['logout'])) {
-    session_unset();
-    session_destroy();
-    header("Location: ../login/login.php");
-    exit;
-}
-
 // Fixed SQL: fetches full person data for exact date matching
 $sql = "
   SELECT 
@@ -54,13 +37,13 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cemetery Circles</title>
-  <link rel="stylesheet" href="circle-styles.css">
+  <link rel="stylesheet" href="ucstyle.css">
 </head>
 <body>
 
 <div class="header">
   <h1>Cemetery Circles</h1>
-  <a href="?logout=1" class="logout-btn">Logout</a>
+
 </div>
 
 <p class="subtitle">Click a circle to view details</p>
@@ -74,7 +57,7 @@ $conn->close();
 <?= json_encode($group_data) ?>
 </script>
 
-<script src="circles.js"></script>
+<script src="ucircles.js"></script>
 
 </body>
 </html>

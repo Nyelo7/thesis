@@ -200,7 +200,7 @@ $is_logged_in = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true
 </section>
  <!-- Clickable picture → goes to circle.php (interactive map) -->
     <div class="clickable-map" onclick="window.location.href='../user/circle.php';" title="Click to view interactive cemetery map">
-      <img src="https://www.familytreemagazine.com/wp-content/uploads/2017/10/Cemetery_plot_map.png" alt="Cemetery layout map with sections and plots">
+      <img src="../images/pic.png" alt="Cemetery layout map with sections and plots">
       <p class="map-caption">Explore the interactive cemetery map → Click here</p>
     </div>
 <section class="features">
