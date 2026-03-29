@@ -1,80 +1,172 @@
-<!-- search_bar.php – Full name part search + exact date + blue highlight -->
-<div style="text-align: center; margin: 30px 0; max-width: 900px; margin-left: auto; margin-right: auto;">
-  <div style="background: #ffffff; padding: 28px; border-radius: 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.08);">
+<!-- search_bar.php – Enhanced Modern & Responsive Design -->
+<div style="text-align: center; margin: 40px 0; padding: 0 15px; max-width: 960px; margin-left: auto; margin-right: auto;">
+  <div style="
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    padding: 35px 25px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255,255,255,0.8);
+  ">
+    
+    <!-- Header -->
+    <div style="margin-bottom: 28px;">
+      <h2 style="
+        margin: 0 0 8px 0;
+        color: #1e2937;
+        font-size: clamp(1.5rem, 5vw, 1.85rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      ">
+        Search Records
+      </h2>
+      <p style="margin: 0; color: #64748b; font-size: 1.05rem; line-height: 1.4;">
+        Find by name, Circle ID, or exact birth/death dates
+      </p>
+    </div>
+
+    <!-- Search Input -->
     <input 
       type="text" 
       id="searchInput" 
-      placeholder="Search any part of name (joshua, forbil, bile) or circle ID" 
+      placeholder="Search "
       style="
-        width: 100%; max-width: 520px;
-        padding: 14px 20px;
-        font-size: 1.1em;
-        border: 2px solid #3498db;
-        border-radius: 12px;
+        width: 100%; 
+        max-width: 620px;
+        padding: 16px 22px;
+        font-size: clamp(1rem, 4vw, 1.15em);
+        border: 3px solid #3b82f6;
+        border-radius: 16px;
         outline: none;
-        transition: border-color 0.2s;
-        margin-bottom: 24px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.15);
+        margin-bottom: 32px;
+        box-sizing: border-box;
       "
-      onfocus="this.style.borderColor='#2980b9'"
-      onblur="this.style.borderColor='#3498db'"
+      onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 4px rgba(37, 99, 235, 0.25)';"
+      onblur="this.style.borderColor='#3b82f6'; this.style.boxShadow='0 4px 15px rgba(59, 130, 246, 0.15)';"
     >
 
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; margin-bottom: 24px;">
-      <div>
-        <label style="font-weight: 600; display: block; margin-bottom: 8px; color: #2c3e50;">Birth date (optional - exact)</label>
+    <!-- Date Filters -->
+    <div style="
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 20px; 
+      margin-bottom: 32px;
+    ">
+      
+      <div style="flex: 1; min-width: 280px; max-width: 340px;">
+        <label style="
+          font-weight: 600; 
+          display: block; 
+          margin-bottom: 10px; 
+          color: #334155;
+          font-size: 1.05rem;
+        ">
+          Birth Date <span style="font-weight:400; color:#94a3b8;"></span>
+        </label>
         <input 
           type="date" 
           id="birthDate" 
-          style="padding: 11px 16px; border: 1px solid #d1d5db; border-radius: 10px; width: 220px; font-size: 1rem;"
+          style="
+            padding: 14px 18px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            width: 100%; 
+            font-size: 1.05rem;
+            background: white;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+          "
+          onfocus="this.style.borderColor='#3b82f6'"
+          onblur="this.style.borderColor='#e2e8f0'"
         >
       </div>
 
-      <div>
-        <label style="font-weight: 600; display: block; margin-bottom: 8px; color: #2c3e50;">Death date (optional - exact)</label>
+      <div style="flex: 1; min-width: 280px; max-width: 340px;">
+        <label style="
+          font-weight: 600; 
+          display: block; 
+          margin-bottom: 10px; 
+          color: #334155;
+          font-size: 1.05rem;
+        ">
+          Death Date <span style="font-weight:400; color:#94a3b8;"></span>
+        </label>
         <input 
           type="date" 
           id="deathDate" 
-          style="padding: 11px 16px; border: 1px solid #d1d5db; border-radius: 10px; width: 220px; font-size: 1rem;"
+          style="
+            padding: 14px 18px; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            width: 100%; 
+            font-size: 1.05rem;
+            background: white;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+          "
+          onfocus="this.style.borderColor='#3b82f6'"
+          onblur="this.style.borderColor='#e2e8f0'"
         >
       </div>
     </div>
 
-    <div style="margin-top: 12px;">
+    <!-- Buttons -->
+    <div style="
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 16px; 
+      justify-content: center;
+    ">
       <button onclick="searchNow()" 
               style="
-                padding: 14px 48px;
-                background: #27ae60;
+                padding: 16px 50px;
+                background: linear-gradient(90deg, #10b981, #34d399);
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 1.1em;
-                font-weight: 600;
+                border-radius: 14px;
+                font-size: clamp(1.05em, 3.5vw, 1.15em);
+                font-weight: 700;
                 cursor: pointer;
-                transition: background 0.2s;
-                margin-right: 16px;
-              ">
-        Search
+                transition: all 0.3s ease;
+                box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+                min-width: 180px;
+                flex: 1;
+                max-width: 220px;
+              "
+              onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 28px rgba(16, 185, 129, 0.4)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.3)';">
+        🔍Search Now
       </button>
 
       <button onclick="clearSearch()" 
               style="
-                padding: 14px 48px;
-                background: #6b7280;
+                padding: 16px 46px;
+                background: #64748b;
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 1.1em;
+                border-radius: 14px;
+                font-size: clamp(1.05em, 3.5vw, 1.15em);
+                font-weight: 600;
                 cursor: pointer;
-                transition: background 0.2s;
-              ">
-        Clear
+                transition: all 0.3s ease;
+                min-width: 160px;
+                flex: 1;
+                max-width: 200px;
+              "
+              onmouseover="this.style.background='#475569'"
+              onmouseout="this.style.background='#64748b'">
+        Clear All
       </button>
     </div>
+
   </div>
 </div>
 
 <script>
-// Search: any part of name + exact date
+// ==================== ORIGINAL FUNCTIONALITY (UNCHANGED) ====================
 function searchNow() {
   const name = document.getElementById('searchInput').value.trim();
   const birthDate = document.getElementById('birthDate').value;
@@ -90,7 +182,7 @@ function searchNow() {
 
   // Reset highlights
   document.querySelectorAll('.circle').forEach(el => {
-    el.style.backgroundColor = ''; // reset to original
+    el.style.backgroundColor = ''; 
     el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
     el.style.zIndex = '1';
   });
@@ -101,7 +193,6 @@ function searchNow() {
     let birthMatch = true;
     let deathMatch = true;
 
-    // Name match: any part of the full name
     if (id.toLowerCase().includes(term)) {
       nameMatch = true;
     } else if (data.persons && data.persons.length > 0) {
@@ -114,7 +205,6 @@ function searchNow() {
 
     if (!nameMatch) return;
 
-    // Birth date filter – exact
     if (birthDate) {
       birthMatch = false;
       if (data.persons && data.persons.length > 0) {
@@ -125,7 +215,6 @@ function searchNow() {
       }
     }
 
-    // Death date filter – exact
     if (deathDate) {
       deathMatch = false;
       if (data.persons && data.persons.length > 0) {
@@ -147,31 +236,26 @@ function searchNow() {
   }
 }
 
-// Highlight: change circle to BLUE + glow
 function highlight(id) {
   const el = document.querySelector(`.circle[data-id="${id}"]`);
   if (!el) return;
 
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  // Save original background
   const originalBg = el.style.backgroundColor || getComputedStyle(el).backgroundColor;
 
-  // Apply blue + glow
-  el.style.backgroundColor = '#3b82f6';      // bright blue
-  el.style.boxShadow = '0 0 40px 20px #791515'; // blue glow
+  el.style.backgroundColor = '#3b82f6';
+  el.style.boxShadow = '0 0 40px 20px #3b82f6';
   el.style.zIndex = '100';
   el.style.transition = 'background-color 0.4s, box-shadow 0.4s';
 
-  // Fade back after 5 seconds
   setTimeout(() => {
     el.style.backgroundColor = originalBg;
     el.style.boxShadow = '0 2px 6px rgba(0,0,0,0.2)';
     el.style.zIndex = '1';
-  }, 10000);
+  }, 5000);
 }
 
-// Clear
 function clearSearch() {
   document.getElementById('searchInput').value = '';
   document.getElementById('birthDate').value = '';

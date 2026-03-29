@@ -1,40 +1,88 @@
 
+    /* Reset */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background: #0f172a;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Container */
+.nav-container {
+  width: 92%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left side (brand + back link) */
+.nav-left {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Brand */
+.nav-brand {
+  color: #f8fafc;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+/* Back link */
+.nav-link {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 3px;
+  transition: 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #38bdf8;
+}
+
+/* Logout button (right side) */
+.logout-btn {
+  padding: 8px 20px;
+  background: rgba(239, 68, 68, 0.9);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 999px; /* pill shape */
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 10px rgba(239,68,68,0.4);
+  transform: translateY(-1px);
+}
     body {
-      margin: 0;
-      padding: 20px;
+      margin: 0px;
+      padding: 0px;
       background: #f8f9fa;
       font-family: Arial, Helvetica, sans-serif;
+      
     }
-    .header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-      padding: 0 20px;
-      position: relative;
-    }
+
     h1 { 
       text-align: center; 
-      color: #2c3e50; 
+      color: #ffffff; 
       margin: 0; 
       flex: 1;
     }
-    .logout-btn {
-      padding: 10px 20px;
-      background: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-      position: absolute;
-      right: 20px;
-    }
-    .logout-btn:hover {
-      background: #c0392b;
-    }
+   
     .subtitle { 
       text-align: center; 
       color: #555; 

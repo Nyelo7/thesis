@@ -57,13 +57,20 @@ $conn->close();
   <link rel="stylesheet" href="cstyles.css">
 </head>
 <body>
+<nav class="navbar">
+  <div class="nav-container">
+    
+    <div class="nav-left">
+      <div class="nav-brand">Cemetery System</div>
+      <a href="../main/landing_page.php" class="nav-link">Back to Home</a>
+    </div>
 
-<div class="header">
-  <h1>Cemetery Circles</h1>
-  <a href="?logout=1" class="logout-btn">Logout</a>
-</div>
+    <a href="?logout=1" class="logout-btn">Logout</a>
 
-<p class="subtitle">Click a circle to view details</p>
+  </div>
+</nav>
+
+
 
 <?php include 'search_bar.php'; ?>
 
@@ -74,7 +81,7 @@ $conn->close();
 <?= json_encode($group_data) ?>
 </script>
 
-<script src="acircles.js"></script>
+<script src="circles.js"></script>
 
 </body>
 </html>

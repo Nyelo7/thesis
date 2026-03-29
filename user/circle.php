@@ -37,14 +37,19 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cemetery Circles</title>
-  <link rel="stylesheet" href="ucstyle.css">
+  <link rel="stylesheet" href="ustyle.css">
 </head>
 <body>
 
-<div class="header">
-  <h1>Cemetery Circles</h1>
-
-</div>
+<!-- Modern Navbar -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      Cemetery System
+    </div>
+    <a href="../main/landing_page.php" class="nav-link">Back to Home</a>
+  </div>
+</nav>
 
 <p class="subtitle">Click a circle to view details</p>
 

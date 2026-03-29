@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       padding: 1rem 1.5rem;
       display: flex;
       justify-content: flex-end;
-      background: #2b6cb0;           /* Main dashboard blue */
+      background: #2c5282;           /* Main dashboard blue */
       color: white;
       border-bottom: 1px solid #2c5282;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     h1 {
       font-size: 2.1rem;
       font-weight: 600;
-      color: #2b6cb0;
+      color: #2c5282;
       text-align: center;
       margin-bottom: 0.6rem;
     }
