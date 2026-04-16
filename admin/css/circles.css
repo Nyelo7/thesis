@@ -1,0 +1,160 @@
+/* css/circle.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:#ffffff;
+    color: #e0e0ff;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background: #2c5282;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.logo i {
+    font-size: 2rem;
+}
+
+.nav-links a {
+    color: #e0e0ff;
+    text-decoration: none;
+    margin: 0 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #4a6bff;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logout-btn {
+    background: #ff4757;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.logout-btn:hover {
+    background: #ff3742;
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    background: #000000;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.map-card {
+
+    background: rgba(30, 30, 50, 0.8);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border: 1px solid rgba(74, 107, 255, 0.2);
+}
+
+.map-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: #2c5282;
+    border-color:#2c5282;
+}
+
+.map-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.map-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.map-card:hover .map-image img {
+    transform: scale(1.1);
+}
+
+.map-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.difficulty {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.map-info {
+    padding: 1.5 rem;
+}
+
+.map-info h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
