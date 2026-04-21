@@ -56,7 +56,11 @@ $conn->close();
 
 <?php include 'search_bar.php'; ?>
 
-<div class="container" id="map"></div>
+<div class="container" id="map">
+  <img src="../../images/compass.png" 
+         alt="Overlay Image" 
+         class="overlay-image">
+</div>
 
 <!-- Pass data to JS -->
 <script id="dbData" type="application/json">

@@ -88,20 +88,29 @@ body {
       color: #555; 
       margin: 10px 0 25px;
     }
-    .container {
-      position: relative;
-      width: 1000px;
-      height: 1000px;
-      margin: 0 auto 40px;
-      background-image: url('../../images/pic.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      border: 3px solid #5a8c4f;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+  .container {
+    position: relative;
+    width: 1000px;
+    height: 1000px;
+    margin: 0 auto 40px;
+    background-image: url('../../images/map2.jpg');
+    background-size: contain;        /* or cover / 100% 100% */
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 3px solid #5a8c4f;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
     }
+    .overlay-image {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 130px;           /* ← Made smaller (was 120px) */
+    height: auto;
+    border-radius: 8px;
+    z-index: 10;
+}
     .circle {
       position: absolute;
       width: 10px;

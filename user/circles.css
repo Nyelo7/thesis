@@ -55,6 +55,12 @@ body {
 .nav-links a.active {
     color: #4a6bff;
 }
+.nav-link{
+    color: #e0e0ff;
+    text-decoration: none;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
 
 .nav-right {
     display: flex;

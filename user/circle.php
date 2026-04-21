@@ -44,7 +44,7 @@ require_once 'db_connect.php';
             <!-- Map 1 -->
             <div class="map-card" onclick="goToMap1()">
                 <div class="map-image">
-                    <img src="https://picsum.photos/id/866/600/400" alt="Desert Canyon">
+                    <img src="../images/map1.jpg" alt="Desert Canyon">
                 </div>
                 <div class="map-info">
                     <h3>Gate 1</h3>
@@ -53,7 +53,7 @@ require_once 'db_connect.php';
             <!-- Map 2 -->
             <div class="map-card" onclick="goToMap2()">
                 <div class="map-image">
-                    <img src="https://picsum.photos/id/866/600/400" alt="Desert Canyon">
+                    <img src="../images/map2.jpg" alt="Desert Canyon">
                 </div>
                 <div class="map-info">
                     <h3>Gate 2</h3>
@@ -63,7 +63,7 @@ require_once 'db_connect.php';
             <!-- Map 3 -->
             <div class="map-card" onclick="goToMap3()">
                 <div class="map-image">
-                    <img src="https://picsum.photos/id/866/600/400" alt="Desert Canyon">
+                    <img src="../images/map3.jpg" alt="Desert Canyon">
                 </div>
                 <div class="map-info">
                     <h3>Gate 3</h3>
@@ -73,7 +73,7 @@ require_once 'db_connect.php';
             <!-- Map 4 -->
             <div class="map-card" onclick="goToMap4()">
                 <div class="map-image">
-                    <img src="https://picsum.photos/id/866/600/400" alt="Desert Canyon">
+                    <img src="../images/map4.png" alt="Desert Canyon">
                 </div>
                 <div class="map-info">
                     <h3>Gate 4</h3>
@@ -83,7 +83,7 @@ require_once 'db_connect.php';
             <!-- Map 5 - Now goes to mapv/mapv.php -->
             <div class="map-card" onclick="goToMap5()">
                 <div class="map-image">
-                    <img src="https://picsum.photos/id/866/600/400" alt="Desert Canyon">
+                    <img src="../images/pic.png" alt="Desert Canyon">
                 </div>
                 <div class="map-info">
                     <h3>Gate 5</h3>
@@ -92,6 +92,7 @@ require_once 'db_connect.php';
 
         </div>
     </div>
+
 
     <script>
         function selectMap(mapId) {

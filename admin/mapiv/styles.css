@@ -102,6 +102,15 @@ body {
       overflow: hidden;
       box-shadow: 0 6px 25px rgba(0,0,0,0.12);
     }
+    .overlay-image {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 130px;           /* ← Made smaller (was 120px) */
+    height: auto;
+    border-radius: 8px;
+    z-index: 10;
+}
     .circle {
       position: absolute;
       width: 10px;
