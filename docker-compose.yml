@@ -6,24 +6,12 @@ services:
     container_name: grave_finder_app
     ports:
       - "8080:80"
-    depends_on:
-      - db
     volumes:
       - .:/var/www/html
-
-  db:
-    image: mysql:8.0
-    container_name: grave_finder_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: gateway01.ap-southeast-1.prod.aws.tidbcloud.com
-      MYSQL_DATABASE: cemetery_db
-      MYSQL_USER: ysYpBYbTy8wXRRB.root
-      MYSQL_PASSWORD: 9ZRah32Iw1zbNYez
-    ports:
-      - "4000"
-    volumes:
-      - db_data:/var/lib/mysql
-
-volumes:
-  db_data:
+      DB_HOST: gateway01.ap-southeast-1.prod.aws.tidbcloud.com
+      DB_PORT: 4000
+      DB_NAME: cemetery_db
+      DB_USER: ysYpBYbTy8wXRRB.root
+      DB_PASS: 9ZRah32Iw1zbNYez
