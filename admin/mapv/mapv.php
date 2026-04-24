@@ -45,7 +45,7 @@ $conn->close();
   <div class="nav-container">
     
     <div class="nav-left">
-      <div class="nav-brand">Gate 1</div>
+      <div class="nav-brand">Gate 5</div>
       <a href="../circle.php" class="nav-link">Back to Home</a>
     </div>
 
