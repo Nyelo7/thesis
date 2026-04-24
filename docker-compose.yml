@@ -16,12 +16,12 @@ services:
     container_name: grave_finder_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: gateway01.ap-southeast-1.prod.aws.tidbcloud.com
       MYSQL_DATABASE: cemetery_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_USER: ysYpBYbTy8wXRRB.root
+      MYSQL_PASSWORD: 9ZRah32Iw1zbNYez
     ports:
-      - "3307:3306"
+      - "4000"
     volumes:
       - db_data:/var/lib/mysql
 
